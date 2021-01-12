@@ -4,13 +4,40 @@ import numpy as np
 import pandas as pd
 
 
+class LambdataFrame(pd.DataFrame):
+
+    def null_count(self):
+        """Counts number of null values in a Dataframe"""
+        self.isnull().sum().sum()
+
+    def train_test_split(self, frac):
+        """Splits Pandas Dataframe into two Lambdataframes"""
+
+        # Number of rows to include in test dataframe
+        test_size = int(frac*len(self))
+
+        # Set random seed and select random indices
+        rng = np.random.RandomState(42)
+        rand_rows = rng.choice(list(self.index), size=test_size, replace=False)
+
+        # Split data into training set and testing subsets
+        df_test = self.loc[rand_rows]
+        df_train = self.drop(labels=rand_rows)
+
+        return df_test, df_train
+
+    def randomize(self, seed):
+        """Randomizes the order of a Dataframe"""
+        return self.sample(len(self), random_state=seed).reset_index(drop=True)
+
+
 def null_count(df):
-    """Counts number of null values in a Pandas Dataframe"""
+    """Counts number of null values in a Lambdataframe"""
     return df.isnull().sum().sum()
 
 
 def train_test_split(df, frac):
-    """Splits Pandas Dataframe into two dataframes"""
+    """Splits Dataframe into two dataframes"""
 
     df = df.copy()
 
@@ -24,8 +51,6 @@ def train_test_split(df, frac):
     # Split data into training set and testing subsets
     df_test = df.loc[rand_rows]
     df_train = df.drop(labels=rand_rows)
-
-    assert len(df_test)+len(df_train) == len(df), "Size error"
 
     return df_test, df_train
 
