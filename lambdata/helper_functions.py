@@ -31,59 +31,34 @@ class LambdataFrame(pd.DataFrame):
         return self.sample(len(self), random_state=seed).reset_index(drop=True)
 
 
-def null_count(df):
-    """Counts number of null values in a Lambdataframe"""
-    return df.isnull().sum().sum()
+if __name__ == "__main__":
 
+    def randomize(df, seed):
+        """Randomizes the order of a Pandas dataframe"""
+        return df.sample(len(df), random_state=seed).reset_index(drop=True)
 
-def train_test_split(df, frac):
-    """Splits Dataframe into two dataframes"""
+    def addy_split(add_series):
+        """
+        From a list of addresses, splits each address into city, state, and zip
+        """
+        # TODO - implement
+        pass
 
-    df = df.copy()
+    def abbr_2_st(state_series, abbr_2_st=True):
+        # TODO - Implement
+        pass
 
-    # Number of rows to include in test dataframe
-    test_size = int(frac*len(df))
+    def list_2_series(list_2_series, df):
+        # TODO - Implement
+        pass
 
-    # Set random seed and select random indices
-    rng = np.random.RandomState(42)
-    rand_rows = rng.choice(list(df.index), size=test_size, replace=False)
+    def rm_outlier(df):
+        # TODO - Implement
+        pass
 
-    # Split data into training set and testing subsets
-    df_test = df.loc[rand_rows]
-    df_train = df.drop(labels=rand_rows)
+    def split_dates(date_series):
+        """Creates month, day and year columns from a dataframe"""
+        df = pd.DataFrame()
+        df['year'], df['month'], df['day'] = date_series.str.split('-')
 
-    return df_test, df_train
-
-
-def randomize(df, seed):
-    """Randomizes the order of a Pandas dataframe"""
-    return df.sample(len(df), random_state=seed).reset_index(drop=True)
-
-
-def addy_split(add_series):
-    """From a list of addresses, splits each address into city, state, and zip"""
-    # TODO - implement
-    pass
-
-
-def abbr_2_st(state_series, abbr_2_st=True):
-    # TODO - Implement
-    pass
-
-
-def list_2_series(list_2_series, df):
-    # TODO - Implement
-    pass
-
-
-def rm_outlier(df):
-    # TODO - Implement
-    pass
-
-
-def split_dates(date_series):
-    """Creates month, day and year columns from a dataframe"""
-    df = pd.DataFrame()
-    df['year'], df['month'], df['day'] = date_series.str.split('-')
-
-    return df
+        return df
