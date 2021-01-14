@@ -8,7 +8,7 @@ class LambdataFrame(pd.DataFrame):
 
     def null_count(self):
         """Counts number of null values in a Dataframe"""
-        self.isnull().sum().sum()
+        return self.isnull().sum().sum()
 
     def train_test_split(self, frac):
         """Splits Pandas Dataframe into two Lambdataframes"""
@@ -58,7 +58,5 @@ if __name__ == "__main__":
 
     def split_dates(date_series):
         """Creates month, day and year columns from a dataframe"""
-        df = pd.DataFrame()
-        df['year'], df['month'], df['day'] = date_series.str.split('-')
-
-        return df
+        # TODO - Implement
+        pass
