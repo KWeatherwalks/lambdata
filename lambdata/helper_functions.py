@@ -24,7 +24,7 @@ class LambdataFrame(pd.DataFrame):
         df_test = self.loc[rand_rows]
         df_train = self.drop(labels=rand_rows)
 
-        return df_test, df_train
+        return df_train, df_test
 
     def randomize(self, seed):
         """Randomizes the order of a Dataframe"""
