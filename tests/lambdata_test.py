@@ -25,6 +25,8 @@ class TestLambdataFrameMethods(unittest.TestCase):
         df_train, df_test = df.train_test_split(0.2)
         self.assertEqual(int(0.2*len(df)), len(df_test))
         self.assertEqual(len(df)-int(0.2*len(df)), len(df_train))
+        self.assertIsInstance(df_train, LambdataFrame)
+        self.assertIsInstance(df_test, LambdataFrame)
 
 
 if __name__ == '__main__':
